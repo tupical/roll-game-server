@@ -13,7 +13,7 @@ export class DiceService implements IDiceService {
     
     // Ensure minimum of 1 step
     const finalTotal = total > 0 ? total : 1;
-    
+
     return {
       total: finalTotal,
       die1,

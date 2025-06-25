@@ -1,7 +1,7 @@
 // Game service implementation
 import { Injectable } from '@nestjs/common';
 import { IGameService, IMoveResult } from './interfaces/game.interface';
-import { Direction, WorldCoord } from '@common/interfaces/game.interface';
+import { Direction, WorldCoord, VISIBLE_RADIUS } from '@common/interfaces/game.interface';
 import { IDiceRollResult } from '@modules/dice/interfaces/dice.interface';
 import { IEventResult } from '@modules/event/interfaces/event.interface';
 import { IPlayer } from '@modules/player/interfaces/player.interface';
@@ -64,6 +64,9 @@ export class GameService implements IGameService {
 
     // Update player in service
     await this.playerService.updatePlayerPosition(playerId, player.position);
+    
+    // Update fog of war after movement
+    await this.updatePlayerFogOfWar(worldId, playerId);
 
     // Process event on cell
     let eventResult = { message: 'Нет события', applied: false };
@@ -126,6 +129,9 @@ export class GameService implements IGameService {
     // Reset processed cells for this player
     this.eventService.resetProcessedCellsForPlayer(worldId, playerId);
 
+    // Обновить туман войны после броска кубиков (чтобы область видимости не уменьшалась)
+    await this.updatePlayerFogOfWar(worldId, playerId);
+
     return rollResult;
   }
 
@@ -167,5 +173,29 @@ export class GameService implements IGameService {
 
   async getPlayerState(worldId: string, playerId: string): Promise<IPlayer | null> {
     return this.worldService.getPlayerInWorld(worldId, playerId);
+  }
+
+  // Обновляет туман войны для игрока
+  private async updatePlayerFogOfWar(worldId: string, playerId: string): Promise<void> {
+    const player = await this.worldService.getPlayerInWorld(worldId, playerId);
+    if (!player) return;
+    
+    const { x, y } = player.position;
+    // Используем глобальную константу VISIBLE_RADIUS
+    const visibleCells = new Set<string>();
+    const exploredCells = new Set<string>();
+    for (let dy = -VISIBLE_RADIUS; dy <= VISIBLE_RADIUS; dy++) {
+      for (let dx = -VISIBLE_RADIUS; dx <= VISIBLE_RADIUS; dx++) {
+        if (Math.abs(dx) + Math.abs(dy) <= VISIBLE_RADIUS * 1.5) {
+          const cellX = x + dx;
+          const cellY = y + dy;
+          const cellKey = `${cellX},${cellY}`;
+          visibleCells.add(cellKey);
+          exploredCells.add(cellKey);
+        }
+      }
+    }
+    await this.playerService.updatePlayerVisibility(playerId, visibleCells);
+    await this.playerService.updatePlayerExploration(playerId, exploredCells);
   }
 }
