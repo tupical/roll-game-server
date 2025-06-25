@@ -42,6 +42,15 @@ export interface IPlayerUpdateData {
 export interface IEventTriggeredData {
   message: string;
   position: WorldCoord;
+  battleState?: {
+    enemyCell: WorldCoord;
+    enemyHp: number;
+    playerHp: number;
+    turn: 'player' | 'enemy';
+    log: string[];
+    finished: boolean;
+    victory?: boolean;
+  };
 }
 
 export interface IWebSocketGateway {

@@ -199,7 +199,8 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
       if (moveResult.eventTriggered && moveResult.eventMessage) {
         this.emitEventTriggered(client.id, {
           message: moveResult.eventMessage,
-          position: player.position
+          position: player.position,
+          battleState: moveResult.battleState // Новое поле для передачи состояния боя
         });
       }
       

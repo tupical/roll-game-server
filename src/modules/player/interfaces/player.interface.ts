@@ -16,6 +16,16 @@ export interface IPlayer {
   bonusSteps: number;
   turnsToSkip: number;
   lastActive: Date;
+  // Состояние боя, если игрок находится в бою с ENEMY-клеткой
+  battleState?: {
+    enemyCell: WorldCoord;
+    enemyHp: number;
+    playerHp: number;
+    turn: 'player' | 'enemy';
+    log: string[];
+    finished: boolean;
+    victory?: boolean;
+  };
 }
 
 export interface IPlayerRepository {

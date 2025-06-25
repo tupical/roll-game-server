@@ -2,6 +2,16 @@
     "id": "static-world-001",
     "name": "Игровой мир",
     "createdAt": "2025-05-28T12:00:00.000Z",
-    "lastUpdated": "2025-05-28T12:00:00.000Z"
-  }
-  
+    "lastUpdated": "2025-06-25T12:00:00.000Z",
+    "cells": [
+        { "x": 0, "y": 0, "eventType": "EMPTY", "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 1, "y": 0, "eventType": "BONUS_STEPS", "eventValue": 2, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 2, "y": 0, "eventType": "DEBUFF_STEPS", "eventValue": 2, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 0, "y": 1, "eventType": "ENEMY", "eventValue": 1, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 1, "y": 1, "eventType": "BONUS_STEPS", "eventValue": 3, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 2, "y": 1, "eventType": "DEBUFF_STEPS", "eventValue": 1, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 0, "y": 2, "eventType": "EMPTY", "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 1, "y": 2, "eventType": "ENEMY", "eventValue": 1, "lastUpdated": "2025-06-25T12:00:00.000Z" },
+        { "x": 2, "y": 2, "eventType": "BONUS_STEPS", "eventValue": 2, "lastUpdated": "2025-06-25T12:00:00.000Z" }
+    ]
+}

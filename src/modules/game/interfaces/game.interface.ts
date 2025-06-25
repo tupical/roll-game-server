@@ -11,6 +11,15 @@ export interface IMoveResult {
   eventTriggered?: boolean;
   eventMessage?: string;
   stepsLeft?: number;
+  battleState?: {
+    enemyCell: WorldCoord;
+    enemyHp: number;
+    playerHp: number;
+    turn: 'player' | 'enemy';
+    log: string[];
+    finished: boolean;
+    victory?: boolean;
+  };
 }
 
 export interface IGameService {

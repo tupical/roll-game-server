@@ -2,69 +2,59 @@
 import { Injectable } from '@nestjs/common';
 import { ICellService, ICell } from './interfaces/cell.interface';
 import { CellEventType, WorldCoord } from '@common/interfaces/game.interface';
-import { v4 as uuidv4 } from 'uuid';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class CellService implements ICellService {
   private cells: Map<string, ICell> = new Map();
+  private staticCells: Map<string, ICell> = new Map();
+
+  constructor() {
+    // Загружаем клетки из статического JSON при инициализации
+    try {
+      const filePath = path.join(process.cwd(), 'src/data/static-world.json');
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const world = JSON.parse(fileContent);
+      if (world.cells && Array.isArray(world.cells)) {
+        for (const cell of world.cells) {
+          const key = `${cell.x},${cell.y}`;
+          this.staticCells.set(key, {
+            ...cell,
+            lastUpdated: cell.lastUpdated ? new Date(cell.lastUpdated) : new Date()
+          });
+        }
+      }
+    } catch (e) {
+      console.error('Ошибка загрузки статических клеток:', e);
+    }
+  }
 
   // Helper method to generate cell key
   private getCellKey(x: number, y: number): string {
     return `${x},${y}`;
   }
 
-  // Helper method to generate cell event based on position
-  private generateCellEvent(x: number, y: number): { type: CellEventType, value?: number } {
-    // Starting cell is always empty
-    if (x === 0 && y === 0) {
-      return { type: CellEventType.EMPTY };
-    } 
-    // Bonus cells
-    else if ((x + y) % 7 === 0 && Math.random() > 0.3) {
-      return { type: CellEventType.BONUS_STEPS, value: 2 };
-    } 
-    // Debuff cells
-    else if ((x + y) % 5 === 0 && Math.random() > 0.3) {
-      return { type: CellEventType.DEBUFF_STEPS, value: -2 };
-    } 
-    // Enemy cells
-    else if ((x * y) % 11 === 0 && x > 0 && y > 0 && Math.random() > 0.5) {
-      return { type: CellEventType.ENEMY, value: 1 };
-    } 
-    // Empty cells by default
-    else {
-      return { type: CellEventType.EMPTY };
-    }
-  }
-
   async getCell(x: number, y: number): Promise<ICell> {
     const cellKey = this.getCellKey(x, y);
-    let cell = this.cells.get(cellKey);
-    
+    let cell = this.staticCells.get(cellKey);
     if (!cell) {
-      // Create new cell if it doesn't exist
-      const event = this.generateCellEvent(x, y);
+      // Если клетки нет в статическом мире — возвращаем пустую клетку
       cell = {
         x,
         y,
-        eventType: event.type,
-        eventValue: event.value,
+        eventType: CellEventType.EMPTY,
         lastUpdated: new Date()
       };
-      this.cells.set(cellKey, cell);
     }
-    
     return cell;
   }
 
   async getCellsInRadius(center: WorldCoord, radius: number): Promise<ICell[]> {
     const cells: ICell[] = [];
     const { x, y } = center;
-    
-    // Get all cells in the specified radius
     for (let dy = -radius; dy <= radius; dy++) {
       for (let dx = -radius; dx <= radius; dx++) {
-        // Check if cell is within radius (using Manhattan distance)
         if (Math.abs(dx) + Math.abs(dy) <= radius * 1.5) {
           const cellX = x + dx;
           const cellY = y + dy;
@@ -73,7 +63,6 @@ export class CellService implements ICellService {
         }
       }
     }
-    
     return cells;
   }
 }

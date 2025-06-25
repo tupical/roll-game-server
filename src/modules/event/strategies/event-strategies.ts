@@ -4,17 +4,20 @@ import { IEventStrategy, IEventResult } from '../interfaces/event.interface';
 import { CellEventType } from '@common/interfaces/game.interface';
 import { IPlayer } from '@modules/player/interfaces/player.interface';
 
+// ВАЖНО: eventValue для DEBUFF_STEPS и BONUS_STEPS всегда должен быть положительным!
+// Тип события определяет знак применения эффекта.
+// Генерация карты/ячейки должна гарантировать положительный eventValue.
+
 @Injectable()
 export class BonusEventStrategy implements IEventStrategy {
   async handleEvent(player: IPlayer, eventType: CellEventType, eventValue: number = 0): Promise<IEventResult> {
     if (eventType !== CellEventType.BONUS_STEPS) {
       return { message: 'Неподходящий тип события', applied: false };
     }
-    
-    player.bonusSteps += eventValue;
-    
+    // eventValue всегда положительный
+    player.bonusSteps += Math.abs(eventValue);
     return {
-      message: `Бонус! +${eventValue} шагов на след. ход.`,
+      message: `Бонус! +${Math.abs(eventValue)} шагов на след. ход.`,
       applied: true
     };
   }
@@ -26,11 +29,10 @@ export class DebuffEventStrategy implements IEventStrategy {
     if (eventType !== CellEventType.DEBUFF_STEPS) {
       return { message: 'Неподходящий тип события', applied: false };
     }
-    
-    player.bonusSteps += eventValue; // Negative value
-    
+    // eventValue всегда положительный
+    player.bonusSteps -= Math.abs(eventValue); // Всегда уменьшает шаги
     return {
-      message: `Дебафф! ${eventValue} шагов на след. ход.`,
+      message: `Дебафф! -${Math.abs(eventValue)} шагов на след. ход.`,
       applied: true
     };
   }

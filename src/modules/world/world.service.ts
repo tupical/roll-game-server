@@ -110,26 +110,49 @@ export class WorldService implements IWorldService, OnModuleInit {
     const player = await this.getPlayerInWorld(this.staticWorld.id, playerId);
     if (!player) return null;
 
-    // Собираем все исследованные ячейки
-    const explored = Array.from(player.exploredCells);
+    // Собираем только клетки в радиусе 10 от игрока
+    const radius = 10;
+    const { x, y } = player.position;
     const visible = new Set(player.visibleCells);
     const cells: import("./interfaces/world.interface").VisibleCell[] = [];
-
-    for (const cellKey of explored) {
-      const [x, y] = cellKey.split(",").map(Number);
-      const cell = await this.cellService.getCell(x, y);
-      const discoveredType = player.discoveredCells && player.discoveredCells.get(cellKey);
-      const showEvent = !!discoveredType || cell.eventType === CellEventType.EMPTY;
-      cells.push({
-        ...cell,
-        eventType: showEvent ? (discoveredType || cell.eventType) : CellEventType.UNKNOWN,
-        eventValue: showEvent ? cell.eventValue : undefined,
-        isVisible: visible.has(cellKey),
-        isExplored: true,
-        isDiscovered: showEvent
-      });
+    for (let dy = -radius; dy <= radius; dy++) {
+      for (let dx = -radius; dx <= radius; dx++) {
+        if (Math.abs(dx) + Math.abs(dy) <= radius * 1.5) {
+          const cellX = x + dx;
+          const cellY = y + dy;
+          const cellKey = `${cellX},${cellY}`;
+          const cell = await this.cellService.getCell(cellX, cellY);
+          const discoveredType = player.discoveredCells && player.discoveredCells.get(cellKey);
+          let eventType: CellEventType;
+          let eventValue: number | undefined;
+          let isDiscovered = false;
+          if (cell.eventType === CellEventType.EMPTY || cell.eventType === CellEventType.ENEMY) {
+            eventType = cell.eventType;
+            eventValue = cell.eventValue;
+            isDiscovered = true;
+          } else if (discoveredType) {
+            eventType = discoveredType;
+            eventValue = cell.eventValue;
+            isDiscovered = true;
+          } else {
+            eventType = CellEventType.UNKNOWN;
+            eventValue = undefined;
+            isDiscovered = false;
+          }
+          // Не добавляем клетки с eventType EMPTY (клиент сам их дорисует)
+          if (eventType !== CellEventType.EMPTY) {
+            cells.push({
+              ...cell,
+              eventType,
+              eventValue,
+              isVisible: visible.has(cellKey),
+              isExplored: true,
+              isDiscovered
+            });
+          }
+        }
+      }
     }
-
     return {
       cells,
       centerX: player.position.x,
@@ -154,21 +177,25 @@ export class WorldService implements IWorldService, OnModuleInit {
           const cellX = x + dx;
           const cellY = y + dy;
           const cellKey = `${cellX},${cellY}`;
-          
           // Add cell to visible cells (currently visible)
           visibleCells.add(cellKey);
-          
-          // Add cell to explored cells (fog of war - once seen, always remembered)
+          // Add cell to explored cells (теперь только в радиусе, а не навсегда)
           exploredCells.add(cellKey);
-          
           // Ensure cell exists
           await this.cellService.getCell(cellX, cellY);
         }
       }
     }
     
-    // Update player's visible cells and explored cells
+    // exploredCells теперь всегда только в радиусе вокруг игрока
     await this.playerService.updatePlayerVisibility(playerId, visibleCells);
     await this.playerService.updatePlayerExploration(playerId, exploredCells);
+  }
+
+  /**
+   * Получить клетки в радиусе вокруг позиции (публичный метод для GameService)
+   */
+  public async getCellsInRadius(center: WorldCoord, radius: number) {
+    return this.cellService.getCellsInRadius(center, radius);
   }
 }
