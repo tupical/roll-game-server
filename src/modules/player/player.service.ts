@@ -18,7 +18,10 @@ export class PlayerService implements IPlayerService {
       username,
       position,
       visibleCells: new Set<string>(),
+<<<<<<< HEAD
       exploredCells: new Set<string>(),
+=======
+>>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
       currentRoll: 0,
       die1Value: 0,
       die2Value: 0,
@@ -78,6 +81,7 @@ export class PlayerService implements IPlayerService {
     player.turnsToSkip += turns;
     return player;
   }
+<<<<<<< HEAD
 
   async updatePlayerExploration(id: string, exploredCells: Set<string>): Promise<IPlayer | null> {
     const player = await this.getPlayer(id);
@@ -90,4 +94,6 @@ export class PlayerService implements IPlayerService {
     
     return player;
   }
+=======
+>>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
 }
