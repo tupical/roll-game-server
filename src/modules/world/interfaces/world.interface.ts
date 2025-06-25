@@ -33,6 +33,7 @@ export interface IWorldService {
   getVisibleMapForPlayer(worldId: string, playerId: string): Promise<VisibleMap | null>;
 }
 
+<<<<<<< HEAD
 export interface VisibleCell extends ICell {
   isVisible: boolean;
   isExplored: boolean;
@@ -40,6 +41,10 @@ export interface VisibleCell extends ICell {
 
 export interface VisibleMap {
   cells: VisibleCell[];
+=======
+export interface VisibleMap {
+  cells: ICell[];
+>>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
   centerX: number;
   centerY: number;
 }
