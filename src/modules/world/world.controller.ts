@@ -39,7 +39,6 @@ export class WorldController {
     const players = await this.worldService.getAllPlayersInWorld(id);
     return players;
   }
-<<<<<<< HEAD
 
   @Get(':worldId/map/:playerId')
   async getVisibleMapForPlayer(
@@ -72,6 +71,4 @@ export class WorldController {
       currentPosition: player.position
     };
   }
-=======
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
 }

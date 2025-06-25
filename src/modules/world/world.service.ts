@@ -103,7 +103,6 @@ export class WorldService implements IWorldService, OnModuleInit {
     return this.cellService.getCell(x, y);
   }
 
-<<<<<<< HEAD
   async getVisibleMapForPlayer(worldId: string, playerId: string): Promise<import("./interfaces/world.interface").VisibleMap | null> {
     // Игнорируем worldId, используем только playerId
     const player = await this.getPlayerInWorld(this.staticWorld.id, playerId);
@@ -124,15 +123,6 @@ export class WorldService implements IWorldService, OnModuleInit {
       });
     }
 
-=======
-  async getVisibleMapForPlayer(worldId: string, playerId: string): Promise<VisibleMap | null> {
-    // Игнорируем worldId, используем только playerId
-    const player = await this.getPlayerInWorld(this.staticWorld.id, playerId);
-    if (!player) return null;
-    
-    const cells = await this.cellService.getCellsInRadius(player.position, VISIBLE_RADIUS);
-    
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
     return {
       cells,
       centerX: player.position.x,
@@ -140,21 +130,14 @@ export class WorldService implements IWorldService, OnModuleInit {
     };
   }
   
-<<<<<<< HEAD
   // Helper method to update player visibility and exploration (fog of war)
-=======
-  // Helper method to update player visibility
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
   private async updatePlayerVisibility(playerId: string): Promise<void> {
     const player = await this.playerService.getPlayer(playerId);
     if (!player) return;
     
     const { x, y } = player.position;
     const visibleCells = new Set<string>();
-<<<<<<< HEAD
     const exploredCells = new Set<string>();
-=======
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
     
     // Update visibility for all cells in visibility radius
     for (let dy = -VISIBLE_RADIUS; dy <= VISIBLE_RADIUS; dy++) {
@@ -165,31 +148,20 @@ export class WorldService implements IWorldService, OnModuleInit {
           const cellY = y + dy;
           const cellKey = `${cellX},${cellY}`;
           
-<<<<<<< HEAD
           // Add cell to visible cells (currently visible)
           visibleCells.add(cellKey);
           
           // Add cell to explored cells (fog of war - once seen, always remembered)
           exploredCells.add(cellKey);
           
-=======
-          // Add cell to visible cells
-          visibleCells.add(cellKey);
-          
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
           // Ensure cell exists
           await this.cellService.getCell(cellX, cellY);
         }
       }
     }
     
-<<<<<<< HEAD
     // Update player's visible cells and explored cells
     await this.playerService.updatePlayerVisibility(playerId, visibleCells);
     await this.playerService.updatePlayerExploration(playerId, exploredCells);
-=======
-    // Update player's visible cells
-    await this.playerService.updatePlayerVisibility(playerId, visibleCells);
->>>>>>> 45a3e43dadd0936aa1d227cbd8f685896cd29498
   }
 }
