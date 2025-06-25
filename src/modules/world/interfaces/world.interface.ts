@@ -36,6 +36,7 @@ export interface IWorldService {
 export interface VisibleCell extends ICell {
   isVisible: boolean;
   isExplored: boolean;
+  isDiscovered: boolean;
 }
 
 export interface VisibleMap {

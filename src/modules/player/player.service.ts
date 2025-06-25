@@ -26,7 +26,8 @@ export class PlayerService implements IPlayerService {
       pathTaken: [position],
       bonusSteps: 0,
       turnsToSkip: 0,
-      lastActive: new Date()
+      lastActive: new Date(),
+      discoveredCells: new Set<string>(),
     };
 
     this.players.set(id, player);

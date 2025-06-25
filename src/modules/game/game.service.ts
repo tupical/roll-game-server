@@ -65,6 +65,17 @@ export class GameService implements IGameService {
     // Update player in service
     await this.playerService.updatePlayerPosition(playerId, player.position);
 
+    // Обновить область видимости после перемещения
+    await this.worldService.updatePlayerVisibility(playerId);
+
+    // Если игрок встал на ячейку с событием, раскрываем её
+    const cellKey = `${player.position.x},${player.position.y}`;
+    const cell = await this.worldService.getCellInWorld(worldId, player.position.x, player.position.y);
+    if (cell && cell.eventType !== undefined && cell.eventType !== null && cell.eventType !== 'EMPTY') {
+      player.discoveredCells = player.discoveredCells || new Set<string>();
+      player.discoveredCells.add(cellKey);
+    }
+
     // Process event on cell
     let eventResult = { message: 'Нет события', applied: false };
 

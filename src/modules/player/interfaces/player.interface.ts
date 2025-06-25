@@ -7,6 +7,7 @@ export interface IPlayer {
   position: WorldCoord;
   visibleCells: Set<string>; // Keys of cells currently visible to the player
   exploredCells: Set<string>; // Keys of cells explored by the player (fog of war)
+  discoveredCells: Set<string>; // Ключи ячеек, содержимое которых раскрыто игроком
   currentRoll: number;
   die1Value: number;
   die2Value: number;

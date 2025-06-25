@@ -4,6 +4,7 @@ export enum CellEventType {
   BONUS_STEPS = 'BONUS_STEPS',
   DEBUFF_STEPS = 'DEBUFF_STEPS',
   ENEMY = 'ENEMY',
+  UNKNOWN = 'UNKNOWN',
 }
 
 // Coordinates in the world

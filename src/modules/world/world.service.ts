@@ -3,7 +3,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { IWorldService, IWorld, VisibleMap } from './interfaces/world.interface';
 import { IPlayer } from '@modules/player/interfaces/player.interface';
 import { ICell } from '@modules/cell/interfaces/cell.interface';
-import { WorldCoord, VISIBLE_RADIUS } from '@common/interfaces/game.interface';
+import { WorldCoord, VISIBLE_RADIUS, CellEventType } from '@common/interfaces/game.interface';
 import { PlayerService } from '@modules/player/player.service';
 import { CellService } from '@modules/cell/cell.service';
 import * as fs from 'fs';
@@ -116,10 +116,14 @@ export class WorldService implements IWorldService, OnModuleInit {
     for (const cellKey of explored) {
       const [x, y] = cellKey.split(",").map(Number);
       const cell = await this.cellService.getCell(x, y);
+      const isDiscovered = player.discoveredCells && player.discoveredCells.has(cellKey);
       cells.push({
         ...cell,
+        eventType: isDiscovered ? cell.eventType : CellEventType.UNKNOWN,
+        eventValue: isDiscovered ? cell.eventValue : undefined,
         isVisible: visible.has(cellKey),
-        isExplored: true
+        isExplored: true,
+        isDiscovered
       });
     }
 
@@ -131,7 +135,7 @@ export class WorldService implements IWorldService, OnModuleInit {
   }
   
   // Helper method to update player visibility and exploration (fog of war)
-  private async updatePlayerVisibility(playerId: string): Promise<void> {
+  public async updatePlayerVisibility(playerId: string): Promise<void> {
     const player = await this.playerService.getPlayer(playerId);
     if (!player) return;
     
