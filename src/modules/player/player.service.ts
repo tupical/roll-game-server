@@ -27,7 +27,7 @@ export class PlayerService implements IPlayerService {
       bonusSteps: 0,
       turnsToSkip: 0,
       lastActive: new Date(),
-      discoveredCells: new Set<string>(),
+      discoveredCells: new Map<string, import("@common/interfaces/game.interface").CellEventType>(),
     };
 
     this.players.set(id, player);

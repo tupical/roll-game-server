@@ -80,4 +80,11 @@ export class EventService {
       }
     }
   }
+
+  public isCellProcessedForPlayer(worldId: string, playerId: string, x: number, y: number): boolean {
+    const processedCellsForWorld = this.processedCells.get(worldId || 'default');
+    if (!processedCellsForWorld) return false;
+    const processedKey = `${playerId}:${x},${y}`;
+    return processedCellsForWorld.has(processedKey);
+  }
 }

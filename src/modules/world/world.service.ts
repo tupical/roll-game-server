@@ -6,6 +6,7 @@ import { ICell } from '@modules/cell/interfaces/cell.interface';
 import { WorldCoord, VISIBLE_RADIUS, CellEventType } from '@common/interfaces/game.interface';
 import { PlayerService } from '@modules/player/player.service';
 import { CellService } from '@modules/cell/cell.service';
+import { EventService } from '@modules/event/event.service';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -17,6 +18,7 @@ export class WorldService implements IWorldService, OnModuleInit {
   constructor(
     private readonly playerService: PlayerService,
     private readonly cellService: CellService,
+    private readonly eventService: EventService,
   ) {}
 
   async onModuleInit() {
@@ -116,14 +118,15 @@ export class WorldService implements IWorldService, OnModuleInit {
     for (const cellKey of explored) {
       const [x, y] = cellKey.split(",").map(Number);
       const cell = await this.cellService.getCell(x, y);
-      const isDiscovered = player.discoveredCells && player.discoveredCells.has(cellKey);
+      const discoveredType = player.discoveredCells && player.discoveredCells.get(cellKey);
+      const showEvent = !!discoveredType || cell.eventType === CellEventType.EMPTY;
       cells.push({
         ...cell,
-        eventType: isDiscovered ? cell.eventType : CellEventType.UNKNOWN,
-        eventValue: isDiscovered ? cell.eventValue : undefined,
+        eventType: showEvent ? (discoveredType || cell.eventType) : CellEventType.UNKNOWN,
+        eventValue: showEvent ? cell.eventValue : undefined,
         isVisible: visible.has(cellKey),
         isExplored: true,
-        isDiscovered
+        isDiscovered: showEvent
       });
     }
 

@@ -68,12 +68,12 @@ export class GameService implements IGameService {
     // Обновить область видимости после перемещения
     await this.worldService.updatePlayerVisibility(playerId);
 
-    // Если игрок встал на ячейку с событием, раскрываем её
+    // Если игрок встал на ячейку с событием, ничего не делаем до применения события
     const cellKey = `${player.position.x},${player.position.y}`;
     const cell = await this.worldService.getCellInWorld(worldId, player.position.x, player.position.y);
     if (cell && cell.eventType !== undefined && cell.eventType !== null && cell.eventType !== 'EMPTY') {
-      player.discoveredCells = player.discoveredCells || new Set<string>();
-      player.discoveredCells.add(cellKey);
+      player.discoveredCells = player.discoveredCells || new Map<string, import("@common/interfaces/game.interface").CellEventType>();
+      player.discoveredCells.set(cellKey, cell.eventType);
     }
 
     // Process event on cell
@@ -85,6 +85,11 @@ export class GameService implements IGameService {
       eventResult = await this.eventService.processEvent(player, player.position);
       player.currentRoll = 0;
       await this.playerService.updatePlayerRoll(playerId, 0, player.die1Value, player.die2Value);
+      // После применения события сохраняем тип события
+      if (cell && cell.eventType !== undefined && cell.eventType !== null && cell.eventType !== 'EMPTY') {
+        player.discoveredCells = player.discoveredCells || new Map<string, import("@common/interfaces/game.interface").CellEventType>();
+        player.discoveredCells.set(cellKey, cell.eventType);
+      }
     }
 
     return {
