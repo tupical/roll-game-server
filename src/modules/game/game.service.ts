@@ -50,16 +50,15 @@ export class GameService implements IGameService {
         break;
     }
 
-    // Check if cell was already visited in this turn
-    if (player.pathTaken.some(pos => pos.x === newX && pos.y === newY)) {
+    // Проверка
+    if (player.pathTaken.slice(0, -1).some(pos => pos.x === newX && pos.y === newY)) {
       return { success: false, message: 'Нельзя вставать на уже пройденную ячейку в этом ходу' };
     }
 
-    // Update player position
-    const oldPosition = { ...player.position };
+    // Обновление позиции
     player.position = { x: newX, y: newY };
     player.stepsTaken++;
-    player.pathTaken.push(player.position);
+    player.pathTaken.push({ x: newX, y: newY });
     player.lastActive = new Date();
 
     // Update player in service
@@ -71,54 +70,31 @@ export class GameService implements IGameService {
     // Проверка ENEMY-клетки и запуск боя
     const cellKey = `${player.position.x},${player.position.y}`;
     const cell = await this.worldService.getCellInWorld(worldId, player.position.x, player.position.y);
-    if (cell && cell.eventType === 'ENEMY') { // CellEventType.ENEMY
-      // Если нет активного боя или бой завершён, создать новый бой
-      if (!player.battleState || player.battleState.finished ||
-          player.battleState.enemyCell.x !== player.position.x || player.battleState.enemyCell.y !== player.position.y) {
-        player.battleState = {
-          enemyCell: { x: player.position.x, y: player.position.y },
-          enemyHp: 3,
-          playerHp: 3,
-          turn: 'player',
-          log: ['Бой начался!'],
-          finished: false
-        };
-      }
-      // Автоматический бой до победы одного из участников
-      while (!player.battleState.finished) {
-        if (player.battleState.turn === 'player') {
-          player.battleState.enemyHp -= 1;
-          player.battleState.log.push('Игрок атакует врага! -1 HP врагу');
-          if (player.battleState.enemyHp <= 0) {
-            player.battleState.finished = true;
-            player.battleState.victory = true;
-            player.battleState.log.push('Победа! Враг повержен.');
-            break;
-          }
-          player.battleState.turn = 'enemy';
-        } else {
-          player.battleState.playerHp -= 1;
-          player.battleState.log.push('Враг атакует игрока! -1 HP игроку');
-          if (player.battleState.playerHp <= 0) {
-            player.battleState.finished = true;
-            player.battleState.victory = false;
-            player.battleState.log.push('Поражение! Игрок погиб.');
-            break;
-          }
-          player.battleState.turn = 'player';
-        }
-      }
-      // Возвращаем состояние боя клиенту
+    // Если клетка ENEMY и она уже очищена этим игроком, не запускаем бой и не отправляем событие
+    if (cell && cell.eventType === 'ENEMY' && player.clearedEnemyCells && player.clearedEnemyCells.has(cellKey)) {
       const visibleCells = await this.getVisibleCellsAroundPlayer(worldId, playerId, player.position, 10);
       return {
         success: true,
         newPosition: player.position,
-        eventTriggered: true,
-        eventMessage: player.battleState.finished
-          ? (player.battleState.victory ? 'Победа над врагом!' : 'Поражение в бою!')
-          : 'Бой с врагом!',
+        eventTriggered: false,
+        eventMessage: undefined,
+        message: undefined,
         stepsLeft: player.currentRoll - player.stepsTaken,
-        battleState: player.battleState,
+        visibleCells,
+        battleState: undefined
+      };
+    }
+    // Если клетка ENEMY и не очищена — запускаем EventService.processEvent, чтобы получить battleState
+    if (cell && cell.eventType === 'ENEMY') {
+      const eventResult = await this.eventService.processEvent(player, player.position);
+      const visibleCells = await this.getVisibleCellsAroundPlayer(worldId, playerId, player.position, 10);
+      return {
+        success: true,
+        newPosition: player.position,
+        eventTriggered: !!eventResult.applied,
+        eventMessage: eventResult.applied ? eventResult.message : undefined,
+        stepsLeft: player.currentRoll - player.stepsTaken,
+        battleState: eventResult.battleState,
         message: undefined,
         visibleCells
       };
@@ -151,16 +127,33 @@ export class GameService implements IGameService {
       }
     }
 
+    // Возвращаем состояние боя клиенту
     const visibleCells = await this.getVisibleCellsAroundPlayer(worldId, playerId, player.position, 10);
-    return {
-      success: true,
-      newPosition: player.position,
-      eventTriggered: eventResult.applied,
-      eventMessage: eventResult.message,
-      message: turnEnded ? 'Ход завершен' : undefined,
-      stepsLeft: player.currentRoll - player.stepsTaken,
-      visibleCells
-    };
+    if (player.battleState) {
+      return {
+        success: true,
+        newPosition: player.position,
+        eventTriggered: true,
+        eventMessage: player.battleState.finished
+          ? (player.battleState.victory ? 'Победа над врагом!' : 'Поражение в бою!')
+          : 'Бой с врагом!',
+        stepsLeft: player.currentRoll - player.stepsTaken,
+        battleState: player.battleState,
+        message: undefined,
+        visibleCells
+      };
+    } else {
+      return {
+        success: true,
+        newPosition: player.position,
+        eventTriggered: turnEnded ? eventResult.applied : false,
+        eventMessage: turnEnded && eventResult.applied ? eventResult.message : undefined,
+        stepsLeft: player.currentRoll - player.stepsTaken,
+        battleState: undefined,
+        message: undefined,
+        visibleCells
+      };
+    }
   }
 
   /**
@@ -169,8 +162,14 @@ export class GameService implements IGameService {
   private async getVisibleCellsAroundPlayer(worldId: string, playerId: string, position: WorldCoord, radius: number) {
     // Получаем все клетки в радиусе
     const cells = await this.worldService.getCellsInRadius(position, radius);
-    // Можно добавить фильтрацию/маскирование данных, если нужно скрывать типы событий
-    return cells;
+    // Фильтруем Enemy-клетки, которые очищены этим игроком
+    const player = await this.worldService.getPlayerInWorld(worldId, playerId);
+    return cells.filter(cell => {
+      if (cell.eventType === 'ENEMY' && player?.clearedEnemyCells?.has(`${cell.x},${cell.y}`)) {
+        return false;
+      }
+      return true;
+    });
   }
 
   async rollDice(worldId: string, playerId: string): Promise<IDiceRollResult> {
@@ -204,7 +203,7 @@ export class GameService implements IGameService {
     player.currentRoll = rollResult.total;
     player.bonusSteps = 0; // Reset bonus
     player.stepsTaken = 0;
-    player.pathTaken = [player.position];
+    player.pathTaken = [{ x: player.position.x, y: player.position.y }];
     player.lastActive = new Date();
 
     // Update player in service
@@ -235,7 +234,7 @@ export class GameService implements IGameService {
     // Reset player's turn state
     player.currentRoll = 0;
     player.stepsTaken = 0;
-    player.pathTaken = [player.position];
+    player.pathTaken = [{ x: player.position.x, y: player.position.y }];
     player.lastActive = new Date();
 
     await this.playerService.updatePlayerRoll(playerId, 0, player.die1Value, player.die2Value);

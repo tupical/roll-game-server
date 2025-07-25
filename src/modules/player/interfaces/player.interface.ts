@@ -26,6 +26,8 @@ export interface IPlayer {
     finished: boolean;
     victory?: boolean;
   };
+  // Клетки с врагами, которые очищены этим игроком (ключи вида 'x,y')
+  clearedEnemyCells: Set<string>;
 }
 
 export interface IPlayerRepository {

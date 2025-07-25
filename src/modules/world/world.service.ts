@@ -22,18 +22,18 @@ export class WorldService implements IWorldService, OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    // Загружаем статический мир из JSON файла при инициализации
+    // Загружаем dungeon_1.json при инициализации
     try {
-      const filePath = path.join(process.cwd(), 'src/data/static-world.json');
+      const filePath = path.join(process.cwd(), 'src/data/world/dungeon_1/dungeon_1.json');
       const fileContent = fs.readFileSync(filePath, 'utf8');
       this.staticWorld = JSON.parse(fileContent);
-      console.log(`Статический мир загружен: ${this.staticWorld.id}`);
+      console.log(`Мир dungeon_1 загружен: ${this.staticWorld.id}`);
     } catch (error) {
-      console.error('Ошибка при загрузке статического мира:', error);
+      console.error('Ошибка при загрузке dungeon_1:', error);
       // Создаем дефолтный мир, если не удалось загрузить из файла
       this.staticWorld = {
-        id: 'static-world-001',
-        name: 'Игровой мир',
+        id: 'dungeon_1',
+        name: 'Подземелье 1',
         createdAt: new Date(),
         lastUpdated: new Date()
       };
@@ -139,15 +139,39 @@ export class WorldService implements IWorldService, OnModuleInit {
             eventValue = undefined;
             isDiscovered = false;
           }
-          // Не добавляем клетки с eventType EMPTY (клиент сам их дорисует)
-          if (eventType !== CellEventType.EMPTY) {
+          // Также не добавляем ENEMY-клетки, если они очищены этим игроком
+          if (!(eventType === CellEventType.ENEMY && player.clearedEnemyCells && player.clearedEnemyCells.has(cellKey))) {
+            // Определяем цвет события
+            let eventColor: number;
+            switch (eventType as CellEventType) {
+              case CellEventType.EMPTY:
+                eventColor = 0xCCCCCC;
+                break;
+              case CellEventType.BONUS_STEPS:
+                eventColor = 0x00FF00;
+                break;
+              case CellEventType.DEBUFF_STEPS:
+                eventColor = 0xFF0000;
+                break;
+              case CellEventType.ENEMY:
+                eventColor = 0xFF00FF;
+                break;
+              case CellEventType.UNKNOWN:
+                eventColor = 0xAAAAAA;
+                break;
+              default:
+                eventColor = 0xAAAAAA;
+                break;
+            }
             cells.push({
               ...cell,
               eventType,
               eventValue,
               isVisible: visible.has(cellKey),
               isExplored: true,
-              isDiscovered
+              isDiscovered,
+              eventColor,
+              cellType: cell.cellType || 'floor'
             });
           }
         }

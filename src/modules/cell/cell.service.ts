@@ -7,27 +7,32 @@ import * as path from 'path';
 
 @Injectable()
 export class CellService implements ICellService {
-  private cells: Map<string, ICell> = new Map();
-  private staticCells: Map<string, ICell> = new Map();
+  private chunkCache: Map<string, ICell[]> = new Map();
+  private chunkSize = 10;
+  private worldSize = 50;
+  private chunkDir = path.join(process.cwd(), 'src/data/world/dungeon_1/chunks');
 
-  constructor() {
-    // Загружаем клетки из статического JSON при инициализации
-    try {
-      const filePath = path.join(process.cwd(), 'src/data/static-world.json');
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      const world = JSON.parse(fileContent);
-      if (world.cells && Array.isArray(world.cells)) {
-        for (const cell of world.cells) {
-          const key = `${cell.x},${cell.y}`;
-          this.staticCells.set(key, {
-            ...cell,
-            lastUpdated: cell.lastUpdated ? new Date(cell.lastUpdated) : new Date()
-          });
-        }
-      }
-    } catch (e) {
-      console.error('Ошибка загрузки статических клеток:', e);
+  constructor() {}
+
+  // Получить ключ чанка по координатам
+  private getChunkKey(x: number, y: number): string {
+    const cx = Math.floor(x / this.chunkSize);
+    const cy = Math.floor(y / this.chunkSize);
+    return `${cx}_${cy}`;
+  }
+
+  // Загрузить чанк из файла (или из кэша)
+  private loadChunk(x: number, y: number): ICell[] {
+    const chunkKey = this.getChunkKey(x, y);
+    if (this.chunkCache.has(chunkKey)) {
+      return this.chunkCache.get(chunkKey)!;
     }
+    const filePath = path.join(this.chunkDir, `chunk_${chunkKey}.json`);
+    if (!fs.existsSync(filePath)) return [];
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const chunk = JSON.parse(fileContent);
+    this.chunkCache.set(chunkKey, chunk.cells);
+    return chunk.cells;
   }
 
   // Helper method to generate cell key
@@ -36,18 +41,28 @@ export class CellService implements ICellService {
   }
 
   async getCell(x: number, y: number): Promise<ICell> {
-    const cellKey = this.getCellKey(x, y);
-    let cell = this.staticCells.get(cellKey);
-    if (!cell) {
-      // Если клетки нет в статическом мире — возвращаем пустую клетку
-      cell = {
-        x,
-        y,
+    // Проверка границ мира
+    if (x < 0 || y < 0 || x >= this.worldSize || y >= this.worldSize) {
+      return {
+        x, y,
         eventType: CellEventType.EMPTY,
         lastUpdated: new Date()
       };
     }
-    return cell;
+    const chunkCells = this.loadChunk(x, y);
+    const cell = chunkCells.find(c => c.x === x && c.y === y);
+    if (cell) {
+      return {
+        ...cell,
+        lastUpdated: cell.lastUpdated ? new Date(cell.lastUpdated) : new Date()
+      };
+    }
+    // Если клетки нет в чанке — возвращаем пустую клетку
+    return {
+      x, y,
+      eventType: CellEventType.EMPTY,
+      lastUpdated: new Date()
+    };
   }
 
   async getCellsInRadius(center: WorldCoord, radius: number): Promise<ICell[]> {

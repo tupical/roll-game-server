@@ -37,6 +37,8 @@ export interface VisibleCell extends ICell {
   isVisible: boolean;
   isExplored: boolean;
   isDiscovered: boolean;
+  eventColor: number;
+  cellType?: string; // тип клетки для визуализации
 }
 
 export interface VisibleMap {

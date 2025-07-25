@@ -19,7 +19,7 @@ export interface IPlayerJoinData {
 export interface IPlayerMoveData {
   worldId: string;
   playerId: string;
-  direction: Direction;
+  direction: string; // 'up', 'down', 'left', 'right'
 }
 
 export interface IPlayerRollData {

@@ -1,0 +1,33 @@
+{
+  "id": "dungeon_1",
+  "name": "Подземелье 1",
+  "size": { "width": 50, "height": 50 },
+  "chunkSize": { "width": 10, "height": 10 },
+  "chunks": [
+    { "chunkX": 0, "chunkY": 0, "file": "chunks/chunk_0_0.json" },
+    { "chunkX": 1, "chunkY": 0, "file": "chunks/chunk_1_0.json" },
+    { "chunkX": 2, "chunkY": 0, "file": "chunks/chunk_2_0.json" },
+    { "chunkX": 3, "chunkY": 0, "file": "chunks/chunk_3_0.json" },
+    { "chunkX": 4, "chunkY": 0, "file": "chunks/chunk_4_0.json" },
+    { "chunkX": 0, "chunkY": 1, "file": "chunks/chunk_0_1.json" },
+    { "chunkX": 1, "chunkY": 1, "file": "chunks/chunk_1_1.json" },
+    { "chunkX": 2, "chunkY": 1, "file": "chunks/chunk_2_1.json" },
+    { "chunkX": 3, "chunkY": 1, "file": "chunks/chunk_3_1.json" },
+    { "chunkX": 4, "chunkY": 1, "file": "chunks/chunk_4_1.json" },
+    { "chunkX": 0, "chunkY": 2, "file": "chunks/chunk_0_2.json" },
+    { "chunkX": 1, "chunkY": 2, "file": "chunks/chunk_1_2.json" },
+    { "chunkX": 2, "chunkY": 2, "file": "chunks/chunk_2_2.json" },
+    { "chunkX": 3, "chunkY": 2, "file": "chunks/chunk_3_2.json" },
+    { "chunkX": 4, "chunkY": 2, "file": "chunks/chunk_4_2.json" },
+    { "chunkX": 0, "chunkY": 3, "file": "chunks/chunk_0_3.json" },
+    { "chunkX": 1, "chunkY": 3, "file": "chunks/chunk_1_3.json" },
+    { "chunkX": 2, "chunkY": 3, "file": "chunks/chunk_2_3.json" },
+    { "chunkX": 3, "chunkY": 3, "file": "chunks/chunk_3_3.json" },
+    { "chunkX": 4, "chunkY": 3, "file": "chunks/chunk_4_3.json" },
+    { "chunkX": 0, "chunkY": 4, "file": "chunks/chunk_0_4.json" },
+    { "chunkX": 1, "chunkY": 4, "file": "chunks/chunk_1_4.json" },
+    { "chunkX": 2, "chunkY": 4, "file": "chunks/chunk_2_4.json" },
+    { "chunkX": 3, "chunkY": 4, "file": "chunks/chunk_3_4.json" },
+    { "chunkX": 4, "chunkY": 4, "file": "chunks/chunk_4_4.json" }
+  ]
+} 

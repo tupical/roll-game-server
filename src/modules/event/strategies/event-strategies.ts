@@ -44,13 +44,60 @@ export class EnemyEventStrategy implements IEventStrategy {
     if (eventType !== CellEventType.ENEMY) {
       return { message: 'Неподходящий тип события', applied: false };
     }
-    
-    player.turnsToSkip += eventValue;
-    
-    return {
-      message: `Враг! Вы пропускаете следующий ход.`,
-      applied: true
+
+    // Логика боя перенесена из game.service.ts
+    // Если нет активного боя или бой завершён, создать новый бой
+    if (!player.battleState || player.battleState.finished ||
+        player.battleState.enemyCell.x !== player.position.x || player.battleState.enemyCell.y !== player.position.y) {
+      player.battleState = {
+        enemyCell: { x: player.position.x, y: player.position.y },
+        enemyHp: 3,
+        playerHp: 3,
+        turn: 'player',
+        log: ['Бой начался!'],
+        finished: false
+      };
+    }
+    // Автоматический бой до победы одного из участников
+    while (!player.battleState.finished) {
+      if (player.battleState.turn === 'player') {
+        player.battleState.enemyHp -= 1;
+        player.battleState.log.push('Игрок атакует врага! -1 HP врагу');
+        if (player.battleState.enemyHp <= 0) {
+          player.battleState.finished = true;
+          player.battleState.victory = true;
+          player.battleState.log.push('Победа! Враг повержен.');
+          // Добавляем клетку в список очищенных для этого игрока
+          if (!player.clearedEnemyCells) player.clearedEnemyCells = new Set<string>();
+          player.clearedEnemyCells.add(`${player.position.x},${player.position.y}`);
+          break;
+        }
+        player.battleState.turn = 'enemy';
+      } else {
+        player.battleState.playerHp -= 1;
+        player.battleState.log.push('Враг атакует игрока! -1 HP игроку');
+        if (player.battleState.playerHp <= 0) {
+          player.battleState.finished = true;
+          player.battleState.victory = false;
+          player.battleState.log.push('Поражение! Игрок погиб.');
+          break;
+        }
+        player.battleState.turn = 'player';
+      }
+    }
+    // Возвращаем результат с состоянием боя
+    const result = {
+      message: player.battleState.finished
+        ? (player.battleState.victory ? 'Победа над врагом!' : 'Поражение в бою!')
+        : 'Бой с врагом!',
+      applied: true,
+      battleState: player.battleState
     };
+    // Если бой завершён, очищаем battleState, чтобы не возвращать его на следующих шагах
+    if (player.battleState.finished) {
+      setTimeout(() => { player.battleState = undefined; }, 0);
+    }
+    return result;
   }
 }
 

@@ -22,6 +22,7 @@ import { GameService } from '@modules/game/game.service';
 import { WorldService } from '@modules/world/world.service';
 import { VisibleMap } from '@modules/world/interfaces/world.interface';
 import { IDiceRollResult } from '@modules/dice/interfaces/dice.interface';
+import { Direction } from '@common/interfaces/game.interface';
 
 @WebSocketGateway({
   cors: {
@@ -77,6 +78,7 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
       
       this.emitPlayerUpdate(client.id, {
         id: player.id,
+        playerId: player.id,
         username: player.username,
         position: player.position,
         currentRoll: player.currentRoll,
@@ -137,6 +139,8 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
       
       // Send updated player state
       this.emitPlayerUpdate(client.id, {
+        id: player.id,
+        playerId: player.id,
         currentRoll: player.currentRoll,
         stepsTaken: player.stepsTaken,
         stepsLeft: player.currentRoll - player.stepsTaken,
@@ -164,8 +168,28 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
     try {
       const { worldId, playerId, direction } = data;
       
+      // Convert string direction to enum
+      let directionEnum: Direction;
+      switch (direction) {
+        case 'up':
+          directionEnum = Direction.UP;
+          break;
+        case 'down':
+          directionEnum = Direction.DOWN;
+          break;
+        case 'left':
+          directionEnum = Direction.LEFT;
+          break;
+        case 'right':
+          directionEnum = Direction.RIGHT;
+          break;
+        default:
+          this.emitError(client.id, 'Неверное направление движения');
+          return;
+      }
+      
       // Move player
-      const moveResult = await this.gameService.movePlayer(worldId, playerId, direction);
+      const moveResult = await this.gameService.movePlayer(worldId, playerId, directionEnum);
       
       if (!moveResult.success) {
         this.emitError(client.id, moveResult.message || 'Ошибка при перемещении');
@@ -182,6 +206,8 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
       
       // Send updated player state
       this.emitPlayerUpdate(client.id, {
+        id: player.id,
+        playerId: player.id,
         position: player.position,
         currentRoll: player.currentRoll,
         stepsTaken: player.stepsTaken,
@@ -243,6 +269,8 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
       
       // Send updated player state
       this.emitPlayerUpdate(client.id, {
+        id: player.id,
+        playerId: player.id,
         currentRoll: 0,
         stepsTaken: 0,
         stepsLeft: 0,
@@ -262,7 +290,11 @@ export class GameGateway implements IWebSocketGateway, OnGatewayConnection, OnGa
   }
 
   // Emitters
-  emitPlayerUpdate(clientId: string, data: IPlayerUpdateData): void {
+  emitPlayerUpdate(clientId: string, data: IPlayerUpdateData & { playerId?: string }): void {
+    // Добавляем playerId, если его нет
+    if (!data.id && data.playerId) {
+      data.id = data.playerId;
+    }
     this.server.to(clientId).emit('player:update', data);
   }
 

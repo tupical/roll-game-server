@@ -12,8 +12,8 @@ async function bootstrap() {
   
   // Enable CORS
   app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
   
@@ -24,7 +24,7 @@ async function bootstrap() {
   }));
   
   // Start server
-  await app.listen(3001);
+  await app.listen(9001, '0.0.0.0');
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

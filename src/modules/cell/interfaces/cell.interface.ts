@@ -7,6 +7,7 @@ export interface ICell {
   eventType: CellEventType;
   eventValue?: number;
   lastUpdated: Date;
+  cellType?: string; // тип клетки для визуализации
 }
 
 export interface ICellRepository {
