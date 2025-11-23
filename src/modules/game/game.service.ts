@@ -19,6 +19,44 @@ export class GameService implements IGameService {
     private readonly eventService: EventService,
   ) {}
 
+  /**
+   * Проверка возможности игрока сделать ход
+   */
+  private canPlayerMove(player: IPlayer): { canMove: boolean; message?: string } {
+    if (player.currentRoll <= 0) {
+      return { canMove: false, message: 'Нужно сначала бросить кубики' };
+    }
+    if (player.stepsTaken >= player.currentRoll) {
+      return { canMove: false, message: 'Все ходы уже использованы' };
+    }
+    if (player.turnsToSkip > 0) {
+      return { canMove: false, message: 'Ход пропущен' };
+    }
+    return { canMove: true };
+  }
+
+  /**
+   * Вычисление новой позиции на основе направления
+   */
+  private calculateNewPosition(position: WorldCoord, direction: Direction): WorldCoord {
+    const newPos = { ...position };
+    switch (direction) {
+      case Direction.UP:
+        newPos.y--;
+        break;
+      case Direction.DOWN:
+        newPos.y++;
+        break;
+      case Direction.LEFT:
+        newPos.x--;
+        break;
+      case Direction.RIGHT:
+        newPos.x++;
+        break;
+    }
+    return newPos;
+  }
+
   async movePlayer(worldId: string, playerId: string, direction: Direction): Promise<IMoveResult & { visibleCells?: any[] }> {
     // Get player
     const player = await this.worldService.getPlayerInWorld(worldId, playerId);
@@ -27,39 +65,59 @@ export class GameService implements IGameService {
     }
 
     // Check if player can move
-    if (player.currentRoll <= 0 || player.stepsTaken >= player.currentRoll || player.turnsToSkip > 0) {
-      return { success: false, message: 'Невозможно сделать ход' };
+    const moveCheck = this.canPlayerMove(player);
+    if (!moveCheck.canMove) {
+      return { success: false, message: moveCheck.message || 'Невозможно сделать ход' };
     }
 
     // Calculate new position
-    let newX = player.position.x;
-    let newY = player.position.y;
-    
-    switch (direction) {
-      case Direction.UP:
-        newY--;
-        break;
-      case Direction.DOWN:
-        newY++;
-        break;
-      case Direction.LEFT:
-        newX--;
-        break;
-      case Direction.RIGHT:
-        newX++;
-        break;
+    const newPosition = this.calculateNewPosition(player.position, direction);
+
+    // Проверка проходимости клетки
+    const targetCell = await this.worldService.getCellInWorld(worldId, newPosition.x, newPosition.y);
+    if (!targetCell) {
+      return { success: false, message: 'Нельзя выйти за пределы карты' };
     }
 
-    // Проверка
-    if (player.pathTaken.slice(0, -1).some(pos => pos.x === newX && pos.y === newY)) {
+    // Разрешаем ходить только по полу и дверям (которые не стены)
+    const isPassable = targetCell.cellType && (
+      targetCell.cellType.startsWith('floor') || 
+      targetCell.cellType.startsWith('door') ||
+      targetCell.cellType.startsWith('corridor') // Если используется такой тип
+    );
+
+    if (!isPassable) {
+       return { success: false, message: 'Сюда нельзя пройти' };
+    }
+
+    // Проверка на повторное посещение ячейки в этом ходу
+    if (player.pathTaken.slice(0, -1).some(pos => pos.x === newPosition.x && pos.y === newPosition.y)) {
       return { success: false, message: 'Нельзя вставать на уже пройденную ячейку в этом ходу' };
     }
 
     // Обновление позиции
-    player.position = { x: newX, y: newY };
+    player.position = newPosition;
     player.stepsTaken++;
-    player.pathTaken.push({ x: newX, y: newY });
+    player.pathTaken.push({ x: newPosition.x, y: newPosition.y });
     player.lastActive = new Date();
+
+    // Автоматическое открытие дверей
+    const cellsToCheck = [
+        { x: newPosition.x, y: newPosition.y }, // Current cell (if we stepped on a closed door)
+        { x: newPosition.x, y: newPosition.y - 1 }, // Up
+        { x: newPosition.x, y: newPosition.y + 1 }, // Down
+        { x: newPosition.x - 1, y: newPosition.y }, // Left
+        { x: newPosition.x + 1, y: newPosition.y }  // Right
+    ];
+
+    for (const pos of cellsToCheck) {
+        const cell = await this.worldService.getCellInWorld(worldId, pos.x, pos.y);
+        if (cell && cell.cellType === 'door_closed_0') {
+            cell.cellType = 'door_open_0';
+            cell.lastUpdated = new Date();
+            await this.worldService.updateCellInWorld(worldId, cell);
+        }
+    }
 
     // Update player in service
     await this.playerService.updatePlayerPosition(playerId, player.position);

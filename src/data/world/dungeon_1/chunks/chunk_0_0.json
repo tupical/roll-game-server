@@ -3,665 +3,665 @@
     {
       "x": 0,
       "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 2,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "cellType": "wall_single_0",
+      "eventType": "EMPTY",
+      "lastUpdated": "2025-06-25T12:00:00.000Z"
+    },
+    {
+      "x": 3,
+      "y": 6,
       "cellType": "wall_corner_top_left_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
-      "x": 1,
-      "y": 0,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 0,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 0,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
       "x": 4,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 5,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 6,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 7,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 8,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 9,
-      "y": 0,
+      "y": 6,
       "cellType": "wall_top_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 0,
-      "y": 1,
-      "cellType": "wall_side_middle_0",
+      "y": 7,
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 1,
-      "y": 1,
-      "cellType": "floor_0",
+      "y": 7,
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 2,
-      "y": 1,
-      "cellType": "floor_0",
+      "y": 7,
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 3,
-      "y": 1,
-      "cellType": "floor_0",
+      "y": 7,
+      "cellType": "wall_side_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 4,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 1,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
-      "y": 2,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 2,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 2,
-      "cellType": "wall_corner_top_left_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 4,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 2,
-      "cellType": "wall_top_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 2,
-      "cellType": "door_closed_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
-      "y": 3,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 3,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 3,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 3,
+      "y": 7,
       "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
-      "x": 4,
-      "y": 3,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
       "x": 5,
-      "y": 3,
+      "y": 7,
       "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 6,
-      "y": 3,
-      "cellType": "floor_1",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 3,
-      "cellType": "floor_1",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 3,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 3,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
-      "y": 4,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 4,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 4,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 4,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 4,
-      "y": 4,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 4,
-      "cellType": "floor_damaged_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 4,
+      "y": 7,
       "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 7,
-      "y": 4,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 4,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 4,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
-      "y": 5,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 5,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 5,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 5,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 4,
-      "y": 5,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 5,
-      "cellType": "floor_damaged_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 5,
-      "cellType": "floor_damaged_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 5,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 5,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 5,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
-      "y": 6,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 6,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 6,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 6,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 4,
-      "y": 6,
-      "cellType": "floor_1",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 6,
-      "cellType": "floor_1",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 6,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 6,
+      "y": 7,
       "cellType": "floor_2",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 8,
-      "y": 6,
-      "cellType": "floor_damaged_0",
+      "y": 7,
+      "cellType": "floor_2",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 9,
-      "y": 6,
+      "y": 7,
       "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 0,
-      "y": 7,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 1,
-      "y": 7,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 2,
-      "y": 7,
-      "cellType": "wall_side_middle_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 3,
-      "y": 7,
-      "cellType": "floor_damaged_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 4,
-      "y": 7,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 5,
-      "y": 7,
-      "cellType": "floor_damaged_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 6,
-      "y": 7,
-      "cellType": "floor_0",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 7,
-      "y": 7,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 8,
-      "y": 7,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 9,
-      "y": 7,
-      "cellType": "floor_2",
-      "eventType": "EMPTY",
-      "lastUpdated": "2025-06-25T12:00:00.000Z"
-    },
-    {
-      "x": 0,
       "y": 8,
-      "cellType": "wall_side_middle_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 1,
       "y": 8,
-      "cellType": "floor_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 2,
       "y": 8,
-      "cellType": "wall_side_middle_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 3,
       "y": 8,
-      "cellType": "floor_1",
+      "cellType": "wall_side_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 4,
       "y": 8,
-      "cellType": "floor_0",
+      "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 5,
       "y": 8,
-      "cellType": "floor_1",
+      "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 6,
       "y": 8,
-      "cellType": "floor_1",
+      "cellType": "floor_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 7,
       "y": 8,
-      "cellType": "floor_1",
+      "cellType": "floor_2",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 8,
       "y": 8,
-      "cellType": "floor_0",
+      "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 9,
       "y": 8,
-      "cellType": "floor_2",
+      "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 0,
       "y": 9,
-      "cellType": "wall_side_middle_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 1,
       "y": 9,
-      "cellType": "floor_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 2,
       "y": 9,
-      "cellType": "door_closed_0",
+      "cellType": "wall_single_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 3,
       "y": 9,
-      "cellType": "floor_damaged_0",
+      "cellType": "wall_side_middle_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 4,
       "y": 9,
-      "cellType": "floor_0",
+      "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
@@ -675,28 +675,28 @@
     {
       "x": 6,
       "y": 9,
-      "cellType": "floor_2",
+      "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 7,
       "y": 9,
-      "cellType": "floor_1",
+      "cellType": "floor_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 8,
       "y": 9,
-      "cellType": "floor_0",
+      "cellType": "floor_1",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     },
     {
       "x": 9,
       "y": 9,
-      "cellType": "floor_0",
+      "cellType": "floor_damaged_0",
       "eventType": "EMPTY",
       "lastUpdated": "2025-06-25T12:00:00.000Z"
     }

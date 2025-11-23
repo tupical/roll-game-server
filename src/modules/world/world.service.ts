@@ -6,7 +6,6 @@ import { ICell } from '@modules/cell/interfaces/cell.interface';
 import { WorldCoord, VISIBLE_RADIUS, CellEventType } from '@common/interfaces/game.interface';
 import { PlayerService } from '@modules/player/player.service';
 import { CellService } from '@modules/cell/cell.service';
-import { EventService } from '@modules/event/event.service';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -14,11 +13,11 @@ import * as path from 'path';
 export class WorldService implements IWorldService, OnModuleInit {
   private staticWorld: IWorld;
   private worldPlayers: Map<string, string> = new Map(); // playerId -> playerId
+  private rooms: any[] = [];
   
   constructor(
     private readonly playerService: PlayerService,
     private readonly cellService: CellService,
-    private readonly eventService: EventService,
   ) {}
 
   async onModuleInit() {
@@ -28,6 +27,14 @@ export class WorldService implements IWorldService, OnModuleInit {
       const fileContent = fs.readFileSync(filePath, 'utf8');
       this.staticWorld = JSON.parse(fileContent);
       console.log(`Мир dungeon_1 загружен: ${this.staticWorld.id}`);
+
+      const roomsPath = path.join(process.cwd(), 'src/data/world/dungeon_1/rooms.json');
+      if (fs.existsSync(roomsPath)) {
+        const content = fs.readFileSync(roomsPath, 'utf8');
+        const data = JSON.parse(content);
+        this.rooms = data.rooms || [];
+        console.log(`Загружено ${this.rooms.length} комнат`);
+      }
     } catch (error) {
       console.error('Ошибка при загрузке dungeon_1:', error);
       // Создаем дефолтный мир, если не удалось загрузить из файла
@@ -67,7 +74,15 @@ export class WorldService implements IWorldService, OnModuleInit {
     
     // Create player
     let player = await this.playerService.getPlayer(playerId);
-    if (!player) player = await this.playerService.createPlayer(playerId, username);
+    
+    if (!player) {
+        let spawnPos = { x: 10, y: 10 };
+        if (this.rooms.length > 0) {
+            const randomRoom = this.rooms[Math.floor(Math.random() * this.rooms.length)];
+            spawnPos = { x: randomRoom.cx, y: randomRoom.cy };
+        }
+        player = await this.playerService.createPlayer(playerId, username, spawnPos);
+    }
 
     player.lastActive = new Date();
     
@@ -103,6 +118,10 @@ export class WorldService implements IWorldService, OnModuleInit {
   async getCellInWorld(worldId: string, x: number, y: number): Promise<ICell | null> {
     // Игнорируем worldId, всегда возвращаем ячейку
     return this.cellService.getCell(x, y);
+  }
+
+  async updateCellInWorld(worldId: string, cell: ICell): Promise<void> {
+    return this.cellService.updateCell(cell);
   }
 
   async getVisibleMapForPlayer(worldId: string, playerId: string): Promise<import("./interfaces/world.interface").VisibleMap | null> {

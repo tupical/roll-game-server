@@ -23,4 +23,5 @@ export interface ICellFactory {
 export interface ICellService {
   getCell(x: number, y: number): Promise<ICell>;
   getCellsInRadius(center: WorldCoord, radius: number): Promise<ICell[]>;
+  updateCell(cell: ICell): Promise<void>;
 }

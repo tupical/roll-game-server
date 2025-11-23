@@ -80,4 +80,23 @@ export class CellService implements ICellService {
     }
     return cells;
   }
+
+  async updateCell(cell: ICell): Promise<void> {
+    const chunkKey = this.getChunkKey(cell.x, cell.y);
+    // Load chunk to cache if not present
+    if (!this.chunkCache.has(chunkKey)) {
+        this.loadChunk(cell.x, cell.y);
+    }
+    
+    if (this.chunkCache.has(chunkKey)) {
+        const cells = this.chunkCache.get(chunkKey)!;
+        const index = cells.findIndex(c => c.x === cell.x && c.y === cell.y);
+        if (index !== -1) {
+            cells[index] = cell;
+        } else {
+            cells.push(cell);
+        }
+        // No persistence for now, just memory update
+    }
+  }
 }

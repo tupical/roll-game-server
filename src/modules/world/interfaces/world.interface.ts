@@ -30,6 +30,7 @@ export interface IWorldService {
   
   // Cell management in world
   getCellInWorld(worldId: string, x: number, y: number): Promise<ICell | null>;
+  updateCellInWorld(worldId: string, cell: ICell): Promise<void>;
   getVisibleMapForPlayer(worldId: string, playerId: string): Promise<VisibleMap | null>;
 }
 
